@@ -19,4 +19,13 @@ import controller from "./controller";
         projectModal.style.display = 'none';
         projectForm.reset();
     };
+
+    static createProject = (name) => {
+        const projectList = document.getElementById('projectList');
+        const project = document.createElement('h4');
+        project.textContent = name;
+        projectList.appendChild(project);
+        projectList.insertBefore(project,projectModal);
+    }
+
 };
