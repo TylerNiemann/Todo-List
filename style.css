@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#content{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+#header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    height: 15vh;
+}
+#headerTitle{
+    font-size: 80px;
+    color: white;
+    margin-left: 30px;
+}
+#headerButton{
+    display: none;
+    width: 50px;
+    background-color: #333;
+    height: 20px;
+    color: white;
+}
+#main{
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: row;
+    height: 85vh;
+}
+#navBar{
+    background-color: darkgray;
+    width: 20vw;
+}
+#taskList{
+    width: 80vw;
+}
