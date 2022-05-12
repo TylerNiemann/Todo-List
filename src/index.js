@@ -1,3 +1,3 @@
-import { openForm } from "./view";
+import { openForms } from "./view";
 
-document.addEventListener('DOMContentLoaded', openForm);
+document.addEventListener('DOMContentLoaded', openForms);
