@@ -1,3 +1,5 @@
-import { openForms } from "./view";
+import View from "./view";
+import controller from "./controller";
 
-document.addEventListener('DOMContentLoaded', openForms);
+document.addEventListener('DOMContentLoaded', View.pageListeners);
+document.addEventListener('DOMContentLoaded', localStorage.clear());
