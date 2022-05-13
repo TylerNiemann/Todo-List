@@ -12,7 +12,9 @@ import controller from "./controller";
 
     const addProjectBtn = document.getElementById('addProject');
     addProjectBtn.addEventListener('click', controller.newProject);
-    }
+
+    const projectList = document.getElementById('projectList');
+    projectList.addEventListener('click', (e) => {if(e.target.classList.contains('project')) this.createPage(e.target.textContent);})};
 
     static closeForm = () => {
         event.preventDefault();
@@ -21,11 +23,20 @@ import controller from "./controller";
     };
 
     static createProject = (name) => {
-        const projectList = document.getElementById('projectList');
         const project = document.createElement('h4');
         project.textContent = name;
+        project.classList.add('project');
         projectList.appendChild(project);
         projectList.insertBefore(project,projectModal);
+    }
+
+    static createPage = (title) => {
+        const pageContent = document.getElementById('taskList');
+        pageContent.innerHTML = "";
+        const projectTitle = document.createElement('h2');
+        projectTitle.textContent = title;
+        projectTitle.classList.add('projectTitle');
+        pageContent.appendChild(projectTitle);
     }
 
 };
