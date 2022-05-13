@@ -102,3 +102,6 @@
 #taskList{
     width: 81vw;
 }
+.projectContainer :hover{
+    color: white;
+}

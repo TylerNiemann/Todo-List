@@ -19,8 +19,10 @@ import controller from "./controller";
             else if(e.target.classList.contains('delete')){
                 const sibling = e.target.nextElementSibling;
                 const parent = e.target.closest('.projectContainer');
+                const pageContent = document.getElementById('taskList');
                 controller.deleteProject(sibling.textContent);
                 parent.remove();
+                pageContent.innerHTML = "";
             }
         });
     };
