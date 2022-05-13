@@ -1,5 +1,3 @@
-import Projects from "./project";
-
 export default class ToDoList {
     constructor(){
         this.projects = [];

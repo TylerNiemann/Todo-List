@@ -1,4 +1,3 @@
-import Projects from "./project";
 import controller from "./controller";
 
  export default class UI {
