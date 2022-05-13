@@ -50,6 +50,7 @@
     font-size: 30px;
 }
 #projectList{
+    overflow: auto;
     padding-top: 10px;
     display: flex;
     height: auto;
@@ -90,6 +91,13 @@
   #closeProject{
       background-color: red;
       padding-left: 5px;
+  }
+  .projectContainer{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      gap: 20px;
   }
 #taskList{
     width: 81vw;

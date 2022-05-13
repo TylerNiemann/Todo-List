@@ -20,7 +20,7 @@
                     <div class="modal" id="projectModal">
                         <form id="projectForm" action="#">
                             <label for="title">Project Title:</label>
-                            <input type="text" name="title" id="title" required>
+                            <input type="text" name="title" id="title" pattern=".{2,}" required>
                             <button type="reset" id="closeProject" form="projectForm">Close</button>
                             <button type="submit" id="addProject" form="projectForm">Add</button>
                         </form>
