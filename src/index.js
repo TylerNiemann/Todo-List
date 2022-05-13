@@ -1,5 +1,5 @@
-import View from "./view";
+import UI from "./UI";
 import controller from "./controller";
 
-document.addEventListener('DOMContentLoaded', View.pageListeners);
-document.addEventListener('DOMContentLoaded', localStorage.clear());
+document.addEventListener('DOMContentLoaded', UI.pageListeners);
+document.addEventListener('DOMContentLoaded', UI.loadProjects);

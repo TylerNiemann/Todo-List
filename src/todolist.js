@@ -1,3 +1,5 @@
+import Projects from "./project";
+
 export default class ToDoList {
     constructor(){
         this.projects = [];
@@ -13,4 +15,10 @@ export default class ToDoList {
     getProjects(){
         return this.projects
     }
+
+    deleteProject = (projectName) => {
+        console.log(this.projects);
+        const projectToDelete = this.projects.find((project) => project.name === projectName);
+        this.projects.splice(this.projects.indexOf(projectToDelete), 1);
+      }
 }

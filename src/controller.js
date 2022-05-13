@@ -1,4 +1,4 @@
-import View from "./view";
+import UI from "./UI";
 import Projects from "./project";
 import ToDoList from "./todolist";
 
@@ -8,7 +8,7 @@ export default class controller  {
         localStorage.setItem('todoList', JSON.stringify(data))
       };
     
-      static getTodoList = () => {
+    static getTodoList = () => {
         const todoList = Object.assign(new ToDoList(),JSON.parse(localStorage.getItem('todoList')));
         todoList.setProjects = (todoList.getProjects().map((project) => Object.assign(new Projects(), project)));
         return todoList;
@@ -16,16 +16,22 @@ export default class controller  {
 
    static newProject = () => {
         const projectName = new Projects(projectForm.title.value);
-        View.closeForm();
-        controller.addProject(projectName);
-        View.createProject(projectName.getName());
+        UI.closeForm();
+        this.addProject(projectName);
+        UI.createProject(projectName.getName());
         console.log(projectName);
     };
 
     static addProject = (project) => {
-        const todoList = controller.getTodoList()
+        const todoList = this.getTodoList()
         todoList.addProject(project)
-        controller.saveTodoList(todoList)
+        this.saveTodoList(todoList)
         console.log(todoList);
     };
+
+    static deleteProject = (projectName) => {
+        const todoList = this.getTodoList()
+        todoList.deleteProject(projectName)
+        this.saveTodoList(todoList)
+      }
 };
