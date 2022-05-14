@@ -3,11 +3,13 @@ import controller from './controller';
 export default class UI {
   static pageListeners = () => {
     const openProjectForm = document.getElementById('openProjectForm');
-    const projectModal = document.getElementById('projectModal');
-    openProjectForm.addEventListener('click', () => projectModal.style.display = 'block');
+    openProjectForm.addEventListener('click', this.openAddForm);
 
     const closeProjectForm = document.getElementById('closeProject');
-    closeProjectForm.addEventListener('click', () => projectModal.style.display = 'none');
+    closeProjectForm.addEventListener('click', this.closeAddForm);
+
+    const closeEditProjectForm = document.getElementById('closeEditProject');
+    closeEditProjectForm.addEventListener('click', this.closeEditForm);
 
     const addProjectBtn = document.getElementById('addProject');
     addProjectBtn.addEventListener('click', controller.newProject);
@@ -15,14 +17,8 @@ export default class UI {
     const projectList = document.getElementById('projectList');
     projectList.addEventListener('click', (e) => {
       if (e.target.classList.contains('project')) this.createPage(e.target.textContent);
-      else if (e.target.classList.contains('delete')) {
-        const sibling = e.target.nextElementSibling;
-        const parent = e.target.closest('.projectContainer');
-        const pageContent = document.getElementById('taskList');
-        controller.deleteProject(sibling.textContent);
-        parent.remove();
-        pageContent.innerHTML = '';
-      }
+      else if (e.target.classList.contains('delete')) this.removeProject(e.target);
+      else if (e.target.classList.contains('editProject')) this.editProject(e.target);
     });
   };
 
@@ -33,7 +29,22 @@ export default class UI {
     });
   };
 
-  static closeForm = () => {
+  static openAddForm() {
+    const projectModal = document.getElementById('projectModal');
+    projectModal.style.display = 'block';
+  }
+
+  static openEditForm() {
+    const editProjectModal = document.getElementById('editProjectModal');
+    editProjectModal.style.display = 'block';
+  }
+
+  static closeEditForm() {
+    editProjectModal.style.display = 'none';
+    editProjectForm.reset();
+  }
+
+  static closeAddForm = () => {
     event.preventDefault();
     projectModal.style.display = 'none';
     projectForm.reset();
@@ -43,15 +54,19 @@ export default class UI {
     const projectLine = document.createElement('div');
     const project = document.createElement('h4');
     const removeProject = document.createElement('button');
+    const editProject = document.createElement('button');
     removeProject.textContent = 'x';
+    editProject.textContent = 'Edit';
     project.textContent = name;
     projectLine.classList.add('projectContainer');
+    editProject.classList.add('editProject');
     removeProject.classList.add('delete');
     project.classList.add('project');
     projectList.appendChild(projectLine);
     projectList.insertBefore(projectLine, projectModal);
     projectLine.appendChild(removeProject);
     projectLine.appendChild(project);
+    projectLine.appendChild(editProject);
   };
 
   static createPage = (title) => {
@@ -61,5 +76,34 @@ export default class UI {
     projectTitle.textContent = title;
     projectTitle.classList.add('projectTitle');
     pageContent.appendChild(projectTitle);
+  };
+
+  static removeProject = (current) => {
+    const sibling = current.nextElementSibling;
+    const parent = current.closest('.projectContainer');
+    const pageContent = document.getElementById('taskList');
+    controller.deleteProject(sibling.textContent);
+    parent.innerHTML = '';
+    parent.remove();
+    pageContent.innerHTML = '';
+  };
+
+  static changeProject = (current) => {
+    const parent = current.closest('.projectContainer');
+    const pageContent = document.getElementById('taskList');
+    parent.innerHTML = '';
+    parent.remove();
+    pageContent.innerHTML = '';
+    controller.deleteProject(current.textContent);
+  };
+
+  static editProject = (current) => {
+    this.openEditForm();
+    const sibling = current.previousElementSibling;
+    const editProjectForm = document.getElementById('editProjectForm');
+    editProjectForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      controller.editProject(sibling, editProjectForm.title.value);
+    });
   };
 }

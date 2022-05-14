@@ -4,7 +4,16 @@ export default class Projects {
     this.tasks = [];
   }
 
+  setName(name) {
+    this.name = name;
+  }
+
   getName() {
     return this.name;
   }
+
+  editProject = (newProjectName) => {
+    this.name = newProjectName;
+    console.log(this.projects);
+  };
 }

@@ -16,8 +16,9 @@ export default class controller {
   };
 
   static newProject = () => {
+    const projectForm = document.getElementById('projectForm');
     const projectName = new Projects(projectForm.title.value);
-    UI.closeForm();
+    UI.closeAddForm();
     this.addProject(projectName);
     UI.createProject(projectName.getName());
   };
@@ -32,5 +33,23 @@ export default class controller {
     const todoList = this.getTodoList();
     todoList.deleteProject(projectName);
     this.saveTodoList(todoList);
+  };
+
+  static changeProject = (current, newProjectName) => {
+    const todoList = this.getTodoList();
+    todoList.editProject(current, newProjectName);
+    this.saveTodoList(todoList);
+  };
+
+  static editProject = (current, newProjectName) => {
+    console.log(current.textContent);
+    // const sibling = current.previousElementSibling;
+    UI.closeEditForm();
+    const projectName = new Projects(newProjectName);
+    this.addProject(projectName);
+    UI.createPage(projectName.getName());
+    UI.createProject(projectName.getName());
+    UI.changeProject(current);
+    window.location.reload();
   };
 }
